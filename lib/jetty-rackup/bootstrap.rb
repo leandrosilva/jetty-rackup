@@ -91,7 +91,6 @@ if config =~ /\.ru$/
   if rackup[/^#\\(.*)/]
     opts.parse! $1.split(/\s+/)
   end
-  #rackup << "\n  set :environment, :#{env}" if env
   rackup.gsub! /set :environment, .*?$/, "set :environment, :#{env}" if env
 else
   abort "configuration file with .ru extention expected, was '#{config}'"
@@ -105,7 +104,7 @@ unless server = Rack::Handler.get(server_type)
   server = Rack::Handler::Jetty
 end
 
-p server  if $DEBUG
+p server if $DEBUG
 
 if $DEBUG
   pp app
